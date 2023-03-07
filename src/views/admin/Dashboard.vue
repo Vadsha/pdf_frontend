@@ -1,7 +1,7 @@
 <template>
 <div class="text-white"  style="background-color: #252c53;">
     <!-- Nav Bar -->
-    <nav class="sticky top-0 z-40 flex justify-between h-12">
+    <nav class="fixed top-0 z-40 flex justify-between w-screen h-12" style="background-color: #252c53;">
       <div class="w-1/3 mt-2">
         <router-link
           class="mx-6 text-3xl text-teal-600 no-underline hover:text-teal-600"
@@ -37,7 +37,7 @@
     </nav>
 
     <!-- side bar -->
-    <div class="fixed w-1/6 h-screen" style="background-color: #252c53;">
+    <div class="fixed w-1/6 h-screen mt-12" style="background-color: #252c53;">
       <div class="py-2">
         <img
           src="../../images/profile.webp"
@@ -64,12 +64,12 @@
           ><i class="fa-solid fa-bars"></i> Category</router-link
         >
         <router-link
-          to="/admin"
+          :to="{name : 'Tags'}"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-tag"></i> Tags</router-link
         >
         <router-link
-          to="/admin"
+          :to="{name : 'Books'}"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-book-open"></i> Books</router-link
         >
