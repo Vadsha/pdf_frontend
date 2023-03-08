@@ -80,7 +80,7 @@
         <router-link
           to="/admin"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-comment"></i> Notification</router-link
+          ><i class="fa-solid fa-bell"></i> Notification</router-link
         >
         <router-link
           to="/admin"

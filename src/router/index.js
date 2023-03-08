@@ -16,6 +16,8 @@ import Books from "../views/admin/books/Index.vue"
 import Book from "../views/admin/books/show/_Id.vue"
 import EditBook from "../views/admin/books/edit/_Id.vue"
 import CreateBook from "../views/admin/books/Create.vue"
+
+import Notifications from "../views/admin/notifications/Index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

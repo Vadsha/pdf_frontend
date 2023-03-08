@@ -1,7 +1,7 @@
 <template>
   <div class="fixed flex justify-center w-screen text-gray-500">
     <form
-      class="relative w-1/2 mt-20 text-white rounded-lg mr-36"
+      class="relative w-1/2 mt-16 text-white rounded-lg mr-36"
       style="background-color: #252c53"
       @submit.prevent="createBook"
     >
@@ -13,7 +13,7 @@
       <h1 class="p-2 mt-12 text-2xl">Create Book</h1>
 
       <div class="flex flex-wrap justify-between">
-        <div class="w-1/2 p-2 py-1">
+        <div class="relative w-1/2 p-2 py-1">
           <label for="name">Name</label>
           <input
             v-model="formData.name"
@@ -21,9 +21,10 @@
             placeholder="search . . ."
             class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
           />
+          <div v-if="errors.name" class="absolute text-red-500 right-2 text-end">{{ errors.name[0] }}</div>
         </div>
 
-        <div class="w-1/2 p-2 py-1">
+        <div class="relative w-1/2 p-2 py-1">
           <label for="author">Author</label>
           <input
             v-model="formData.author"
@@ -31,9 +32,10 @@
             placeholder="search . . ."
             class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
           />
+          <div v-if="errors.author" class="absolute text-red-500 right-2 text-end">{{ errors.author[0] }}</div>
         </div>
 
-        <div class="w-1/2 p-2 py-1">
+        <div class="relative w-1/2 p-2 py-1">
           <label for="file">File</label>
           <input
             @change="insertFile"
@@ -41,9 +43,10 @@
             placeholder="search . . ."
             class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
           />
+          <div v-if="errors.file" class="absolute text-red-500 right-2 text-end">{{ errors.file[0] }}</div>
         </div>
 
-        <div class="w-1/2 p-2 py-1">
+        <div class="relative w-1/2 p-2 py-1">
           <label for="category">Category</label>
           <select
             class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
@@ -58,10 +61,11 @@
               {{ category.name }}
             </option>
           </select>
+          <div v-if="errors.category" class="absolute text-red-500 right-2 text-end">{{ errors.category[0] }}</div>
         </div>
 
         <div class="flex w-full p-2 py-1">
-            <div class="w-1/2">
+            <div class="relative w-1/2">
                   <label for="image">Image</label><br>
                   <input
                         @change="insertImage"
@@ -69,6 +73,7 @@
                         placeholder="search . . ."
                         class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
                   />
+                  <div v-if="errors.image" class="absolute text-red-500 right-2 text-end">{{ errors.image[0] }}</div>
             </div>
           <img v-if="previewImage" style="width: 75px; height:90px ;" class="mt-2 ml-12 rounded" :src="previewImage" alt="">
         </div>
@@ -81,14 +86,15 @@
                   class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
                   v-model="formData.description" id="" cols="30" rows="2">
             </textarea>
+            <div v-if="errors.description" class="absolute text-red-500 right-2 text-end">{{ errors.description[0] }}</div>
         </div>
 
-        <div class="flex w-1/2 p-2 py-1">
+        <div class="relative flex w-1/2 p-2 py-1">
           <div class="p-1 m-auto bg-teal-600 rounded" v-for="tag in tags" :key="tag.id">
             <input class="mr-1" type="checkbox" :value="tag.name" v-model="formData.tags" />
             <label for="crime">{{ tag.name }}</label>
+            <div v-if="errors.tags"  class="absolute mt-2 text-red-500 right-6 text-end">please select some tags</div>
           </div>
-
         </div>
 
 
@@ -112,13 +118,14 @@ import axios from "axios";
 export default {
   data() {
     return {
-      previewImage : "",
-      file : '',
-      image : '',
-      messageStore: useMessageStore(),
       categories: [],
       tags: [],
-      formData: {
+      previewImage : "",
+      file : '',        //to mutate pdf file
+      image : '',   //to mutate image
+      messageStore: useMessageStore(),
+
+      formData: {     //to upload
         name: "",
         author: "",
         description: "",
@@ -127,6 +134,10 @@ export default {
         category_id: null,
         tags: [],
       },
+
+      errors : {    //for response errors
+
+      }
     };
   },
 
@@ -148,7 +159,7 @@ export default {
         this.tags = response.data.data;
       })
       .catch((response) => {
-        console.log(response);
+        console.log(response.data.errors);
       });
   },
 
@@ -174,7 +185,8 @@ export default {
           router.push("/admin/books"); 
         })
         .catch((response) => {
-          console.log(response);
+          this.errors = response.response.data.errors;
+          console.log(this.errors);
         });
     },
 
