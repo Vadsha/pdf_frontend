@@ -15,6 +15,12 @@
             enabled: true,
             trigger: 'enter',
           }"
+          :pagination-options="{
+            enabled: true,
+            mode: 'records',
+            perPage: 4,
+            perPageDropdown: [3, 4, 5],
+          }"
         >
           <template #table-actions>
             <router-link
