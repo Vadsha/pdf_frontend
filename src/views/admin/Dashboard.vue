@@ -1,15 +1,14 @@
 <template>
-<div class="text-white"  style="background-color: #252c53;">
+  <div class="text-white" style="background-color: #252c53">
     <!-- Nav Bar -->
-    <nav class="fixed top-0 z-40 flex justify-between w-screen h-12" style="background-color: #252c53;">
-      <div class="w-1/3 mt-2">
-        <router-link
-          class="mx-6 text-3xl text-teal-600 no-underline hover:text-teal-600"
-          to="/"
-          ><span class="text-red-500">L</span>O<span class="text-red-500"
-            >G</span
-          >O</router-link
-        >
+    <nav
+      class="fixed top-0 z-40 flex justify-between w-screen h-12"
+      style="background-color: #252c53"
+    >
+      <div class="w-1/3 my-2">
+        <router-link class="w-full mx-8 text-3xl text-center text-teal-600 no-underline hover:text-teal-600" to="/" >
+            Nerdy <span  class="text-red-400">Spot</span>
+        </router-link>
       </div>
 
       <div class="relative flex w-1/3">
@@ -37,7 +36,7 @@
     </nav>
 
     <!-- side bar -->
-    <div class="fixed w-1/6 h-screen mt-12" style="background-color: #252c53;">
+    <div class="fixed w-1/6 h-screen mt-12" style="background-color: #252c53">
       <div class="py-2">
         <img
           src="../../images/profile.webp"
@@ -47,10 +46,10 @@
         <p class="inline mt-4 ml-4 text-2xl">Zwe Zar Ni</p>
       </div>
       <hr />
-      
+
       <div class="flex flex-col">
         <router-link
-          to="/admin"
+          :to="{ name: 'Dashboard' }"
           class="w-full p-2 text-center text-white bg-teal-600 hover:text-gray-700"
           ><i class="fa-solid fa-gauge"></i> Dashboard</router-link
         >
@@ -59,17 +58,17 @@
 
       <div class="flex flex-col">
         <router-link
-          :to="{ name : 'Categories' }"
+          :to="{ name: 'Categories' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-bars"></i> Category</router-link
         >
         <router-link
-          :to="{name : 'Tags'}"
+          :to="{ name: 'Tags' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-tag"></i> Tags</router-link
         >
         <router-link
-          :to="{name : 'Books'}"
+          :to="{ name: 'Books' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-book-open"></i> Books</router-link
         >
@@ -78,17 +77,17 @@
 
       <div class="flex flex-col">
         <router-link
-          to="/admin"
+          :to="{ name: 'Notifications' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-bell"></i> Notification</router-link
         >
         <router-link
-          to="/admin"
+          :to="{ name: 'BookRequests' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-pen"></i> Book Requests</router-link
         >
         <router-link
-          to="/admin"
+          :to="{ name: 'Downloads' }"
           class="p-2 ml-12 hover:scale-105 hover:text-green-500"
           ><i class="fa-solid fa-download"></i> Downloads</router-link
         >

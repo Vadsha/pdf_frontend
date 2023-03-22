@@ -1,12 +1,29 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+export const useCountStore = defineStore("count", {
+     state: () => {
+          return {
+            categories : "",
+            tags : "",
+            books : "",
+            requests : ""
+          }
+      },
 
-  return { count, doubleCount, increment }
-})
+      actions : {
+          updateCount(name , count){
+            if (name == 'categories') {
+              this.categories = count;
+            }
+            else if (name == 'tags') {
+              this.tags = count;
+            }
+            else if (name == 'books') {
+              this.books = count;
+            }
+            else {
+              this.requests = count;
+            }
+          }
+      }
+});

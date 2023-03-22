@@ -1,9 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import IndexView from '../views/publicView/Index.vue'
-import _Category from "../views/publicView/_Category.vue";
-import _Tag from "../views/publicView/_Tag.vue";
+import _Id from "../views/publicView/_Id.vue"
+
+import Register from "../views/authentication/Register.vue"
+import Login from "../views/authentication/Login.vue"
+
 import Dashboard from "../views/admin/Dashboard.vue"
-import Test from "../views/admin/Test.vue"
+
 import Categories from "../views/admin/categories/Index.vue"
 import CreateCategory from "../views/admin/categories/Create.vue"
 import EditCategory from "../views/admin/categories/_Id.vue"
@@ -18,35 +22,39 @@ import EditBook from "../views/admin/books/edit/_Id.vue"
 import CreateBook from "../views/admin/books/Create.vue"
 
 import Notifications from "../views/admin/notifications/Index.vue"
+import BookRequests from "../views/admin/bookRequests/Index.vue"
+import Downloads from "../views/admin/downloads/Downloads.vue"
+
+import NotFound from "../views/publicView/NotFound.vue"
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path : '/test',
-      name : "Test",
-      component : Test
-    },
     {
       path: '/',
       name: 'index',
       component: IndexView,
     },
     {
-      path : '/:category',
-      name : "_Category",
-      component : _Category,
-      props : true
+      path: '/:slug',
+      name: '_Id',
+      component: _Id,
+    },
+
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
     },
     {
-      path : '/:tag',
-      name : "_Tag",
-      component : _Tag,
-      props : true
+      path: '/register',
+      name: 'Register',
+      component: Register,
     },
 
     {
       path : '/admin',
-      name : "dashboard",
+      name : "Dashboard",
       component : Dashboard,
       children : [
         {
@@ -101,7 +109,29 @@ const router = createRouter({
           name : 'EditBook',
           component : EditBook
         },
+
+        {
+          path : 'notifications',
+          name : 'Notifications',
+          component : Notifications
+        },
+        {
+          path : 'requests',
+          name : 'BookRequests',
+          component : BookRequests
+        },
+        {
+          path : 'downloads',
+          name : 'Downloads',
+          component : Downloads
+        },
       ]
+    },
+
+    {
+      path: "/:catchAll(.*)",
+      name: "NotFound",
+      component: NotFound,
     }
   ]
 })

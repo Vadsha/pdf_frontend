@@ -7,10 +7,11 @@
           :to="{ name: 'Books' }"
           ><i class="fa-solid fa-arrow-left"></i
         ></router-link>
-        <img class="rounded-t w-fit" :src="book.image" alt="" />
-        <ul class="p-2">
+        <img class="w-2/3 py-2 mx-auto rounded-t" :src="book.image" alt="" />
+        <ul class="p-2 py-1">
           <li class="py-2 border-b-2">Name : {{ book.name }}</li>
           <li class="py-2 border-b-2">Author : {{ book.author }}</li>
+          <li class="py-2 border-b-2">Downloads : {{ book.downloads }}</li>
           <li class="py-2 border-b-2">Category : {{ book.category }}</li>
           <li class="py-2 border-b-2">
             Tags :
