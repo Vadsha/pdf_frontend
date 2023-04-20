@@ -7,6 +7,7 @@ import Register from "../views/authentication/Register.vue"
 import Login from "../views/authentication/Login.vue"
 
 import Dashboard from "../views/admin/Dashboard.vue"
+import DashboardView from "../views/admin/Index.vue"
 
 import Categories from "../views/admin/categories/Index.vue"
 import CreateCategory from "../views/admin/categories/Create.vue"
@@ -57,6 +58,11 @@ const router = createRouter({
       name : "Dashboard",
       component : Dashboard,
       children : [
+        {
+          path : '',
+          name : 'dashboard-view',
+          component : DashboardView
+        },
         {
           path : 'categories',
           name : 'Categories',

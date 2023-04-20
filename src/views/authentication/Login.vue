@@ -2,8 +2,8 @@
       <div class="flex justify-center min-h-screen">
                   <div class="container flex flex-col items-center justify-center flex-1 px-2 mx-auto ">
                       <div class="relative w-1/3 px-6 py-12 rounded shadow-md bg-sky-100" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;">
-                        <router-link class="w-full text-3xl text-center text-teal-600 no-underline hover:text-teal-600" to="/" >
-                              79 <span  class="text-red-400">Collection</span>
+                        <router-link class="w-full ml-2 text-3xl text-center text-teal-600 no-underline hover:text-teal-600" to="/" >
+                              Nerdy <span  class="text-red-400">Spot</span>
                         </router-link>
 
                         <form @submit.prevent="login">
