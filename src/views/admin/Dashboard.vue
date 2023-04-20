@@ -49,7 +49,7 @@
 
       <div class="flex flex-col">
         <router-link
-          :to="{ name: 'Dashboard' }"
+          :to="{ name: 'dashboard-view' }"
           class="w-full p-2 text-center text-white bg-teal-600 hover:text-gray-700"
           ><i class="fa-solid fa-gauge"></i> Dashboard</router-link
         >
