@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center mt-20">
+  <div class="flex justify-center mt-12">
     <!-- message -->
     <div
       v-if="message"
@@ -12,7 +12,7 @@
 
     <!-- categories -->
     <vue-good-table
-      class="w-1/2 mt-4"
+      class="w-full"
       :columns="columns"
       :rows="books"
       styleClass="vgt-table"
@@ -107,16 +107,7 @@ export default {
     });
   },
   methods: {
-    // deleteFun (slug , name) {
-    //       axios.delete('http://localhost:8000/api/books/' + slug)
-    //       .then((response) => {
-    //         this.messageStore.updateMessage(name , "has been deleted successfully!");
-    //         router.push('/admin/books');
-    //       })
-    //       .catch((response) => {
-    //         console.log(response);
-    //       })
-    // },
+
   },
 };
 </script>
