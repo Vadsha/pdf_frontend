@@ -69,20 +69,7 @@ export default {
   },
   methods: {
     downloadBook(){
-      // axios({
-      //   url: 'http://localhost:8000/api/download', // File URL Goes Here
-      //   method: 'POST',
-      //   responseType: 'arraybuffer',
-      //   data : {
-      //     book : this.book.file
-      //   }
-      // })
-      // .then((response) => {
-      //   console.log(response);
-      // })
-      // .catch((response) => {
-      //   console.log(response);
-      // });
+
     },
 
     deleteBook(){

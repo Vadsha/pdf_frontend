@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed flex justify-center w-screen text-gray-500">
+  <div class="flex justify-center w-screen text-gray-500">
     <form
       class="relative w-1/2 mt-16 text-white rounded-lg mr-36"
       style="background-color: #252c53"
@@ -75,7 +75,7 @@
                   />
                   <div v-if="errors.image" class="absolute text-red-500 right-2 text-end">{{ errors.image[0] }}</div>
             </div>
-          <img v-if="previewImage" style="width: 75px; height:90px ;" class="mt-2 ml-12 rounded" :src="previewImage" alt="">
+          <img v-if="previewImage" style="width: 120px; height:90px ;" class="mt-2 ml-12 rounded" :src="previewImage" alt="">
         </div>
 
         
@@ -89,10 +89,10 @@
             <div v-if="errors.description" class="absolute text-red-500 right-2 text-end">{{ errors.description[0] }}</div>
         </div>
 
-        <div class="relative flex w-full p-2 py-1">
-          <div class="p-1 mx-2 bg-teal-600 rounded" v-for="tag in tags" :key="tag.id">
+        <div class="relative flex flex-wrap w-full p-2 py-1">
+          <div class="p-1 m-2 bg-teal-600 rounded" v-for="tag in tags" :key="tag.id">
             <input class="mr-1" type="checkbox" :value="tag.name" v-model="formData.tags" />
-            <label for="crime">{{ tag.name }}</label>
+            <label>{{ tag.name }}</label>
             <div v-if="errors.tags"  class="absolute mt-2 text-red-500 right-6 text-end">please select some tags</div>
           </div>
         </div>

@@ -39,7 +39,7 @@
     <div class="fixed w-1/6 h-screen mt-12" style="background-color: #252c53">
       <div class="py-2">
         <img
-          src="../../images/profile.webp"
+          src="../../assets/images/profile.webp"
           class="inline w-1/6 ml-4 rounded-full"
           alt=""
         />

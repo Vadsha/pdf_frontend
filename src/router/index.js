@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import IndexView from '../views/publicView/Index.vue'
-import _Id from "../views/publicView/_Id.vue"
+import HomeView from '../views/publicView/Home.vue'
+import ClientCategories from '../views/publicView/Categories.vue'
+import BooksByCategories from '../views/publicView/BooksByCategories.vue'
 
 import Register from "../views/authentication/Register.vue"
 import Login from "../views/authentication/Login.vue"
@@ -35,12 +37,25 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: IndexView,
+      children : [
+        {
+          path: '',
+          name: 'HomeView',
+          component: HomeView,
+        },
+        {
+          path: '/categories',
+          name: 'ClientCategories',
+          component: ClientCategories,
+        },
+        {
+          path: '/categories/:id',
+          name: 'BooksByCategories',
+          component: BooksByCategories,
+        },
+      ]
     },
-    {
-      path: '/:slug',
-      name: '_Id',
-      component: _Id,
-    },
+
 
     {
       path: '/login',
@@ -140,6 +155,12 @@ const router = createRouter({
       component: NotFound,
     }
   ]
+});
+
+router.beforeEach((to , from , next) => {
+  // console.log("this is to" , from);
+  // alert(to.meta.middleware);
+  next();
 })
 
 export default router
