@@ -4,6 +4,7 @@ import IndexView from '../views/publicView/Index.vue'
 import HomeView from '../views/publicView/Home.vue'
 import ClientCategories from '../views/publicView/Categories.vue'
 import BooksByCategories from '../views/publicView/BooksByCategories.vue'
+import AllBooks from '../views/publicView/AllBooks.vue'
 
 import Register from "../views/authentication/Register.vue"
 import Login from "../views/authentication/Login.vue"
@@ -52,6 +53,11 @@ const router = createRouter({
           path: '/categories/:id',
           name: 'BooksByCategories',
           component: BooksByCategories,
+        },
+        {
+          path: '/books',
+          name: 'AllBooks',
+          component: AllBooks,
         },
       ]
     },
