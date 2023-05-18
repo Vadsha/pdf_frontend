@@ -37,7 +37,7 @@
     <script>
     import { useMessageStore } from "../../../stores/message.js";
     import router from "../../../router";
-    import axios from 'axios';
+    import ApiService from "../../../Apiservice";
     export default {
       data() {
         return {
@@ -51,7 +51,7 @@
       methods: {
         createCategory() {
           if (this.formData.name) {
-            axios.post('http://localhost:8000/api/categories' , this.formData)
+            ApiService.post('categories' , this.formData)
             .then((response) => {
               let name = response.data.data.name;
               this.messageStore.updateMessage(name , "has been created successfully");

@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed flex justify-center w-screen text-gray-500">
+  <div class="text-gray-500 ">
     <form
-      class="relative w-1/2 mt-16 text-white rounded-lg mr-36"
+      class="relative text-white"
       style="background-color: #252c53"
       @submit.prevent="editBook"
     >
@@ -10,7 +10,7 @@
         :to="{ name: 'Books' }"
         ><i class="fa-solid fa-arrow-left"></i
       ></router-link>
-      <h1 class="p-2 mt-12 text-2xl">Edit Book</h1>
+      <h1 class="p-2 py-6 text-2xl">Edit Book</h1>
 
       <div class="flex flex-wrap justify-between">
         <div class="relative w-1/2 p-2 py-1">
@@ -87,10 +87,10 @@
             <div v-if="errors.description" class="absolute text-red-500 right-2 text-end">{{ errors.description[0] }}</div>
         </div>
 
-        <div class="relative flex w-1/2 p-2 py-1">
-          <div class="p-1 m-auto bg-teal-600 rounded" v-for="tag in tags" :key="tag.id">
+        <div class="relative flex flex-wrap w-full p-2 py-1">
+          <div class="p-1 m-2 bg-teal-600 rounded" v-for="tag in tags" :key="tag.id">
             <input class="mr-1" type="checkbox" :value="tag.name" v-model="formData.tags" />
-            <label for="crime">{{ tag.name }}</label>
+            <label>{{ tag.name }}</label>
             <div v-if="errors.tags"  class="absolute mt-2 text-red-500 right-6 text-end">please select some tags</div>
           </div>
         </div>
@@ -112,7 +112,7 @@
     <script>
 import { useMessageStore } from "../../../../stores/message.js";
 import router from "../../../../router";
-import axios from "axios";
+import ApiService from '../../../../Apiservice.js';
 export default {
   data() {
     return {
@@ -141,8 +141,7 @@ export default {
 
   mounted() {
     //book
-    axios
-      .get("http://localhost:8000/api/books/" + this.slug)
+    ApiService.get(`books/${this.slug}`)
       .then((response) => {
         this.formData = response.data.data;
       })
@@ -150,8 +149,7 @@ export default {
         console.log(response);
       });
     //categories
-    axios
-      .get("http://localhost:8000/api/categories")
+    ApiService.get("categories")
       .then((response) => {
         this.categories = response.data.data;
       })
@@ -160,8 +158,7 @@ export default {
       });
 
     //tags
-    axios
-      .get("http://localhost:8000/api/tags")
+    ApiService.get("tags")
       .then((response) => {
         this.tags = response.data.data;
       })
@@ -181,8 +178,7 @@ export default {
       form.set('category_id' , this.formData.category_id)
       form.set('tags' , this.formData.tags)
 
-      axios
-        .put("http://localhost:8000/api/books/" + this.slug , form)
+      ApiService.put(`books/${this.slug}` , form)
         .then((response) => {
           let name = response.data.data.name;
           this.messageStore.updateMessage(

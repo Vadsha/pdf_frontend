@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center w-screen text-gray-500">
+  <div class="text-gray-500 ">
     <form
-      class="relative w-1/2 mt-16 text-white rounded-lg mr-36"
+      class="relative text-white"
       style="background-color: #252c53"
       @submit.prevent="createBook"
     >
@@ -10,7 +10,7 @@
         :to="{ name: 'Books' }"
         ><i class="fa-solid fa-arrow-left"></i
       ></router-link>
-      <h1 class="p-2 mt-12 text-2xl">Create Book</h1>
+      <h1 class="p-2 py-6 text-2xl">Create Book</h1>
 
       <div class="flex flex-wrap justify-between">
         <div class="relative w-1/2 p-2 py-1">
@@ -114,7 +114,7 @@
     <script>
 import { useMessageStore } from "../../../stores/message.js";
 import router from "../../../router";
-import axios from "axios";
+import ApiService from '../../../Apiservice.js';
 export default {
   data() {
     return {
@@ -143,8 +143,7 @@ export default {
 
   mounted() {
     //categories
-    axios
-      .get("http://localhost:8000/api/categories")
+    ApiService.get("categories")
       .then((response) => {
         this.categories = response.data.data;
       })
@@ -153,8 +152,7 @@ export default {
       });
 
     //tags
-    axios
-      .get("http://localhost:8000/api/tags")
+    ApiService.get("tags")
       .then((response) => {
         this.tags = response.data.data;
       })
@@ -174,8 +172,7 @@ export default {
       form.set('category_id' , this.formData.category_id)
       form.set('tags' , this.formData.tags)
 
-      axios
-        .post("http://localhost:8000/api/books", form)
+      ApiService.post("books", form)
         .then((response) => {
           let name = response.data.data.name;
           this.messageStore.updateMessage(

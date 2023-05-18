@@ -1,110 +1,106 @@
 <template>
-  <div class="text-white" style="background-color: #252c53">
-    <!-- Nav Bar -->
-    <nav
-      class="fixed top-0 z-40 flex justify-between w-screen h-12"
-      style="background-color: #252c53"
-    >
-      <div class="w-1/3 my-2">
-        <router-link class="w-full mx-8 text-3xl text-center text-teal-600 no-underline hover:text-teal-600" to="/" >
-            Nerdy <span  class="text-red-400">Spot</span>
+  <div>
+
+      <!-- Nav Bar for Large Screen -->
+    <nav class="sticky top-0 z-50 flex justify-between w-screen p-2 text-white bg-gray-800">
+      <div class="flex">
+        <router-link :to="{name : 'dashboard-view'}">
+          <h1 class="text-teal-500 sm:text-3xl">Nerdy <span class="text-red-500">Spot</span></h1>
         </router-link>
       </div>
-
-      <div class="relative flex w-1/3">
-        <input
-          type="text"
-          placeholder="search . . ."
-          class="relative w-full p-2 pr-10 mt-2 text-sm bg-white border-0 rounded shadow outline-none h-fit placeholder-slate-300 text-slate-600 focus:outline-none focus:ring"
-        />
-        <button class="absolute text-gray-500 rounded right-2 top-4">
-          <i class="ml-2 fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
-
-      <div class="flex justify-end w-1/3">
-        <ul class="flex mt-1 mr-2">
-          <li class="px-3 py-1 rounded cursor-pointer">
-            <button
-              class="p-1 px-2 text-white no-underline bg-teal-600 rounded hover:text-red-500"
-            >
-              Log Out
-            </button>
-          </li>
-        </ul>
+      <div class="hidden md:block">
+        <button class="px-3 py-1 mx-4 bg-teal-500 rounded hover:bg-teal-400">Log Out</button>
       </div>
     </nav>
 
-    <!-- side bar -->
-    <div class="fixed w-1/6 h-screen mt-12" style="background-color: #252c53">
-      <div class="py-2">
-        <img
-          src="../../assets/images/profile.webp"
-          class="inline w-1/6 ml-4 rounded-full"
-          alt=""
-        />
-        <p class="inline mt-4 ml-4 text-2xl">Zwe Zar Ni</p>
-      </div>
-      <hr />
+    <div class="flex justify-between w-screen">
+      
+      <transition name="navbar">
+          <div  class="flex flex-col items-center w-1/6 h-screen text-white bg-gray-800">
+                <div class="flex py-4">
+                  <img class="w-8 my-auto mr-2 rounded-full h-fit" src="../../assets/images/profile.webp" alt="">
+                  <h1 class="my-auto">Vaddshah Raduv</h1>
+                </div>
+                <router-link class="w-full py-2 text-center bg-teal-500 hover:bg-teal-400" :to="{name : 'dashboard-view'}">
+                  DASHBOARD
+                </router-link>
+                 <ul class="w-full px-8 py-2">
+                    <li v-for="item in navItems" :key="item.name" class="py-2">
+                        <router-link :to="{name : item.path}" class="hover:text-teal-500">
+                          {{ item.name }}
+                        </router-link>
+                    </li>
+                  </ul>
+        </div>
+      </transition>
 
-      <div class="flex flex-col">
-        <router-link
-          :to="{ name: 'dashboard-view' }"
-          class="w-full p-2 text-center text-white bg-teal-600 hover:text-gray-700"
-          ><i class="fa-solid fa-gauge"></i> Dashboard</router-link
-        >
+      <div class="z-30 w-5/6">
+        <router-view></router-view>
       </div>
-      <hr />
 
-      <div class="flex flex-col">
-        <router-link
-          :to="{ name: 'Categories' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-bars"></i> Category</router-link
-        >
-        <router-link
-          :to="{ name: 'Tags' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-tag"></i> Tags</router-link
-        >
-        <router-link
-          :to="{ name: 'Books' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-book-open"></i> Books</router-link
-        >
-      </div>
-      <hr />
-
-      <div class="flex flex-col">
-        <router-link
-          :to="{ name: 'Notifications' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-bell"></i> Notification</router-link
-        >
-        <router-link
-          :to="{ name: 'BookRequests' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-pen"></i> Book Requests</router-link
-        >
-        <router-link
-          :to="{ name: 'Downloads' }"
-          class="p-2 ml-12 hover:scale-105 hover:text-green-500"
-          ><i class="fa-solid fa-download"></i> Downloads</router-link
-        >
-      </div>
-      <hr />
     </div>
 
-    <!-- main feed -->
-    <div class="absolute right-0 w-5/6">
-      <RouterView />
-    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      navItems : [
+      {
+          name : 'Manage Users',
+          path : 'Categories',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Categories',
+          path : 'Categories',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Tags',
+          path : 'Tags',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Books',
+          path : 'Books',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Book Requests',
+          path : 'BookRequests',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Notifications',
+          path : 'Notifications',
+          icon : 'text-red-500'
+        },
+        {
+          name : 'Downloads',
+          path : 'Downloads',
+          icon : 'text-red-500'
+        },
+      ]
+    }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.navbar-enter-from {
+  opacity: 0;
+  transform: translateX(-6rem);
+}
+
+.navbar-enter-active , .navbar-leave-active {
+  transition: all 0.3s ease;
+}
+
+.navbar-leave-to {
+  opacity: 0;
+  transform: translateX(-6rem);
+}
 </style>

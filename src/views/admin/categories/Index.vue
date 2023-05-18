@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center mt-20">
+  <div class="flex justify-center">
     <!-- message -->
     <div
       v-if="message"
@@ -12,7 +12,7 @@
 
     <!-- categories -->
     <vue-good-table
-      class="w-1/2 mt-4"
+      class="mt-4 sm:w-3/4"
       :columns="columns"
       :rows="categories"
       styleClass="vgt-table"
@@ -60,7 +60,7 @@
 
 <script>
 import router from "../../../router";
-import axios from "axios";
+import ApiService from "../../../Apiservice";
 import { useMessageStore } from "../../../stores/message.js";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
@@ -97,8 +97,7 @@ export default {
       }, 3000);
     }
 
-    axios
-      .get("http://localhost:8000/api/categories")
+    ApiService.get("categories")
       .then((response) => {
         this.categories = response.data.data;
       })
@@ -108,8 +107,7 @@ export default {
   },
   methods: {
     deleteFun(slug, name) {
-      axios
-        .delete("http://localhost:8000/api/categories/" + slug)
+        ApiService.delete(`categories/${slug}`)
         .then((response) => {
           this.messageStore.updateMessage(
             name,
