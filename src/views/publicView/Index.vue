@@ -26,10 +26,10 @@
             <router-link @click="menuOpened = false" :to="{name : 'HomeView'}" class="hover:scale-105 hover:text-teal-500">Home</router-link>
           </li>
           <li class="p-4">
-            <router-link :to="{name : 'ClientCategories'}"  class="hover:scale-105 hover:text-teal-500">Categories</router-link>
+            <router-link @click="menuOpened = false" :to="{name : 'ClientCategories'}"  class="hover:scale-105 hover:text-teal-500">Categories</router-link>
           </li>
           <li class="p-4">
-            <router-link  to="/" class="hover:scale-105 hover:text-teal-500">Books</router-link>
+            <router-link @click="menuOpened = false"  :to="{name : 'AllBooks'}" class="hover:scale-105 hover:text-teal-500">Books</router-link>
           </li>
           <li class="p-4">
             <button @click="requestBookBox = true; menuOpened = false" class="bg-teal-600 py-1.5 border  px-3 text-white rounded  hover:bg-transparent hover:border-teal-600 hover:text-gray-700">Request Book</button>
@@ -53,7 +53,7 @@
           <router-link :to="{name : 'ClientCategories'}"  class="hover:scale-105 hover:text-teal-500">Categories</router-link>
         </li>
         <li class="px-4">
-          <router-link to="/"  class="hover:scale-105 hover:text-teal-500">Books</router-link>
+          <router-link :to="{name : 'AllBooks'}"  class="hover:scale-105 hover:text-teal-500">Books</router-link>
         </li>
         <li class="p-2">
           <button @click="requestBookBox = !requestBookBox" class="bg-teal-600 py-1.5 border border-teal-600  px-3 text-white rounded  hover:bg-transparent">Request Book</button>
@@ -63,6 +63,7 @@
 
     <router-view class="z-40"></router-view>
 
+      <!-- Footer -->
     <div class="py-4 text-gray-200 bg-gray-800">
         <p class="w-full text-center">@Your mama so fat that she fell from both of the bed</p>
     </div>

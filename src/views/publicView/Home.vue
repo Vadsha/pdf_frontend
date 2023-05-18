@@ -1,11 +1,9 @@
 <template>
       <div class="w-screen">
 
-            <div class="sm:py-20 py-6  px-8 mx-auto m-6 bg-gray-800 text-white sm:w-[60%] w-[96%]">
-                  <h1 class="w-full text-xl text-center">“There is more treasure in books than in all the pirate’s loot on Treasure Island.”</h1>
-                  <h1 class="mt-4 mr-2 text-end"> -Walt Disney</h1>
-            </div>
+            <Quotes :message="quoteMessage" :speaker="quoteSpeaker" />
 
+                  <!-- Latest Books -->
             <div  class="p-4 mx-auto sm:w-5/6">
                   <h1 class="py-4 text-2xl">Latest Books</h1>
                   <div class="flex-wrap sm:flex">
@@ -21,16 +19,18 @@
                   </div>
             </div>
 
+                  <!-- Categories -->
             <div class="p-4 mx-auto my-12 text-white bg-gray-800 sm:w-5/6">
                   <h1 class="py-4 text-2xl">Categories</h1>
                   <ul class="flex-wrap w-5/6 mx-auto sm:flex">
                         <li class="py-1.5 sm:w-1/3" v-for="category in categories" :key="category.id">
-                              <router-link to="/" class="hover:text-teal-500">{{ category.name }}</router-link>
+                              <router-link :to="{name : 'BooksByCategories' , params : {id : category.id}}" class="hover:text-teal-500">{{ category.name }}</router-link>
                         </li>
                   </ul>
             </div>
 
-            <div class="flex-wrap mx-auto my-12 sm:flex sm:w-5/6">
+                  <!-- Trending Books -->
+            <div class="flex-wrap mx-auto mt-12 sm:flex sm:w-5/6">
                   <h1 class="w-full p-4 text-2xl">Top Trending Books</h1>
                   <router-link to="/" class="sm:w-[48%] m-2 sm:flex hover:scale-110 transition p-4" v-for="book in booksByDownload" :key="book.id">
                         <img :src="book.image" class="w-3/4 mx-auto sm:w-1/3 h-fit" alt="">
@@ -42,23 +42,31 @@
                   </router-link>
             </div>    
 
-            <div class="sm:py-20 py-6  px-8 mx-auto m-6 bg-gray-800 text-white sm:w-[60%] w-[96%]">
-                  <h1 class="w-full text-xl text-center">“Books serve to show a man that those original thoughts of his aren’t very new after all.”</h1>
-                  <h1 class="mt-4 mr-2 text-end"> - Abraham Lincoln</h1>
-                  <div class="flex flex-col items-center w-full">
-                        <h1 class="py-6 text-xl sm:text-2xl">READ ALL THE BOOKS</h1>
-                        <router-link to="/" class="p-3 px-6 text-white bg-teal-500 border border-teal-500 hover:bg-transparent ">read all books</router-link>
-                  </div>
+                  <!-- Read All The Books -->
+            <div class="flex justify-center mx-auto mb-16 text-white sm:w-5/6">
+                  <router-link :to="{name : 'AllBooks'}" class="px-4 py-2 text-lg transition bg-teal-600 border border-teal-600 hover:bg-transparent hover:text-gray-800">
+                        read all the books
+                  </router-link>
             </div>
 
+            <Quotes  :message="quoteMessage2" :speaker="quoteSpeaker2" />
       </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Quotes from '../../components/Quotes.vue'
       export default {
+            components : {
+                  Quotes
+            },
+
             data () {
                   return {
+                        quoteMessage : `“There is more treasure in books than in all the pirate’s loot on Treasure Island.”`,
+                        quoteSpeaker : "Walt Disney",
+                        quoteMessage2 : `“Books serve to show a man that those original thoughts of his aren’t very new after all.”`,
+                        quoteSpeaker2 : " Abraham Lincoln",
                         books : [],
                         categories : [],
                         booksByDownload : [],

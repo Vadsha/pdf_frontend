@@ -1,14 +1,14 @@
 <template>
       <div class="w-screen">
-
+            
             <Quotes :message="quoteMessage" :speaker="quoteSpeaker" />
 
-            <div class="flex-wrap mx-auto sm:w-5/6 sm:flex">
-                  <div class="sm:w-[30%] p-6" v-for="book in books" :key="book.id">
+            <div class="flex-wrap justify-between w-full mx-auto sm:w-5/6 sm:flex">
+                  <div class="sm:w-[33%] p-2 my-4" v-for="book in books" :key="book.id">
                         <router-link to="/">
                               <img class="w-full hover:scale-105" :src="book.image" alt="">
                         </router-link>
-                        <div class="flex justify-between p-1 py-2">
+                        <div class="flex justify-between p-1">
                               <div>
                                     <h1 class="text-lg">{{ book.name }}</h1>
                               </div>
@@ -17,6 +17,9 @@
                   </div>
             </div>
 
+            <div v-show="page < lastPage" class="flex justify-center p-6">
+                  <button class="animate-bounce" @click="addBooks">see more</button>
+            </div>
       </div>
 </template>
 
@@ -30,31 +33,32 @@ import Quotes from '../../components/Quotes.vue'
 
             data () {
                   return {
-                        quoteMessage : `"Reading is to the mind what exercise is to the body."`,
-                        quoteSpeaker : "Joseph Addison",
-                        id : this.$route.params.id,
+                        quoteMessage : `"Think before you speak.Read before you think."`,
+                        quoteSpeaker : "Fran Lebowitz",
                         books : [],
+                        page : 1,
+                        lastPage : null,
                   }
             },
 
             mounted () {
-                  this.getBooks();
+                  this.getAllBooks();
             },
 
             methods : {
-                  getBooks () {
-                        axios.get(`http://localhost:8000/api/client/get-books-by-categories/${this.id}`)
+                  getAllBooks() {
+                        axios.get(`http://localhost:8000/api/client/get-all-books?page=${this.page}`)
                               .then((response) => {
-                                    this.books = response.data.data;
-                                    if (this.books.length == 0) {
-                                          this.$router.push('/categories');
-                                    }
+                                    this.books.push(...response.data.data)
+                                    this.lastPage = response.data.meta.last_page
                               })
-                              .catch((response) => {
-                                    console.log(response);
-                              })
+                  },
+                  addBooks () {
+                        this.page++;
+                        this.getAllBooks();
                   }
             }
+
       }
 </script>
 
