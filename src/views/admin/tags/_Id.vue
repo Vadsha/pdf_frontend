@@ -1,6 +1,6 @@
 <template>
       <div class="flex justify-center">
-        <div class="w-1/2 mt-24 rounded" style="background-color: #252c53">
+        <div class="w-2/3 mt-24 rounded" style="background-color: #252c53">
           <form
             @submit.prevent="editFunction"
             class="relative mt-6 text-white rounded"
@@ -11,7 +11,7 @@
               :to="{ name: 'Tags' }"
               ><i class="fa-solid fa-arrow-left"></i
             ></router-link>
-            <h1 class="p-2 mt-4 text-2xl">Edit Tag - {{ oldData.name }}</h1>
+            <h1 class="p-2 mt-4 text-2xl">Edit Tag -</h1>
             <div class="p-2">
               <label for="name">Name</label>
               <input
@@ -36,39 +36,31 @@
       </div>
     </template>
     
-    <script>
-    import router from "../../../router";
-    import axios from "axios";
-    import { useMessageStore } from "../../../stores/message.js";
+<script>
+  import router from "../../../router";
+  import { useMessageStore } from "../../../stores/message.js";
+  import ApiService from '../../../Apiservice';
     export default {
       data() {
         return {
           messageStore: useMessageStore(),
           slug: this.$route.params.slug,
           error: false,
-          oldData: {
-            name: "",
-          },
           newData: {
             name: "",
           },
         };
       },
       mounted() {
-        axios
-          .get("http://localhost:8000/api/tags/" + this.slug)
+        ApiService.get(`tags/${this.slug}`)
           .then((response) => {
-            this.oldData.name = response.data.data.name;
+            this.newData.name = response.data.data.name;
           });
       },
       methods: {
         editFunction() {
           if (this.newData.name) {
-            axios
-              .patch(
-                "http://localhost:8000/api/tags/" + this.slug,
-                this.newData
-              )
+            ApiService.patch(`tags/${this.slug}`, this.newData )
               .then((response) => {
                 let name = response.data.data.name;
                 this.messageStore.updateMessage(

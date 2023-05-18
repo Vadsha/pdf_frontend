@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center mt-12">
+  <div class="flex justify-center">
     <!-- message -->
     <div
       v-if="message"
@@ -57,10 +57,10 @@
     
     <script>
 import router from "../../../router";
-import axios from "axios";
 import { useMessageStore } from "../../../stores/message.js";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
+import ApiService from '../../../Apiservice';
 export default {
   components: {
     VueGoodTable,
@@ -102,7 +102,7 @@ export default {
       }, 3000);
     }
 
-    axios.get("http://localhost:8000/api/books").then((response) => {
+    ApiService.get("books").then((response) => {
       this.books = response.data.data;
     });
   },

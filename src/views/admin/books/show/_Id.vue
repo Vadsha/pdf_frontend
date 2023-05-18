@@ -1,13 +1,13 @@
 <template>
-  <div class="flex justify-center">
-    <div class="w-1/2 mt-16 rounded" style="background-color: #252c53">
+  <div class="flex justify-center text-white">
+    <div class="w-2/3 mt-4 rounded" style="background-color: #252c53">
       <div class="relative rounded-lg">
         <router-link
           class="absolute p-2 py-1 ml-1 bg-teal-600 rounded top-1"
           :to="{ name: 'Books' }"
           ><i class="fa-solid fa-arrow-left"></i
         ></router-link>
-        <img class="w-2/3 py-2 mx-auto rounded-t" :src="book.image" alt="" />
+        <img class="w-1/2 py-2 mx-auto rounded-t" :src="book.image" alt="" />
         <ul class="p-2 py-1">
           <li class="py-2 border-b-2">Name : {{ book.name }}</li>
           <li class="py-2 border-b-2">Author : {{ book.author }}</li>
@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import { useMessageStore } from '../../../../stores/message';
 import router from '../../../../router';
+import ApiService from '../../../../Apiservice';
 export default {
   data() {
     return {
@@ -61,8 +61,7 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("http://localhost:8000/api/books/" + this.slug)
+    ApiService.get(`books/${this.slug}`)
       .then((response) => {
         this.book = response.data.data;
       });
@@ -73,7 +72,7 @@ export default {
     },
 
     deleteBook(){
-      axios.delete('http://localhost:8000/api/books/' + this.slug)
+      ApiService.delete(`books/${this.slug}`)
       .then((response) => {
         let name = this.book.name;
         this.messageStore.updateMessage(name , "has been deleted successfully!");

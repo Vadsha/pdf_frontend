@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import TokenService from '../TokenService'
+
 import IndexView from '../views/publicView/Index.vue'
 import HomeView from '../views/publicView/Home.vue'
 import ClientCategories from '../views/publicView/Categories.vue'
@@ -78,6 +80,9 @@ const router = createRouter({
       path : '/admin',
       name : "Dashboard",
       component : Dashboard,
+      // meta : {
+      //   middleware : 'auth'
+      // },
       children : [
         {
           path : '',
@@ -164,9 +169,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to , from , next) => {
-  // console.log("this is to" , from);
-  // alert(to.meta.middleware);
-  next();
+  if (to.meta.middleware == 'auth') {
+    let token = TokenService.getToken();
+    if (token) {
+      next();
+    } else {
+      TokenService.destoryToken();
+      window.location.assign('/login');
+    }
+  }  else {
+    next();
+  }
 })
 
 export default router
+//4|NE4FETBUtbVPFjqwjwUYXLyuZcH7KNc4uftymirE

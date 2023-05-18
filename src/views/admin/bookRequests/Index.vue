@@ -1,7 +1,7 @@
 <template>
       <div class="relative flex justify-center w-screen">
         <div
-          class="flex flex-wrap justify-center w-5/6 mt-16 ml-2 mr-56 text-gray-500 rounded-lg ">
+          class="flex flex-wrap justify-center w-5/6 ml-2 mr-56 text-gray-500 rounded-lg ">
 
         <div  class="absolute z-50 p-2 px-6 rounded top-16 right-2">Deleted comment</div>
 
@@ -9,7 +9,7 @@
             <button @click="deleteRequest(request.id , index)" class="absolute p-2 py-1 text-white bg-teal-600 rounded right-2 top-2 hover:text-gray-500"><i class="fa-solid fa-trash"></i></button>
             <h1 class="text-xl " >{{ request.user }}</h1>
             <span class="my-1"> {{ request.created_at }}</span>
-            <p class="p-2 text-white bg-teal-600 rounded">{{ request.bookrequest }}</p>
+            <p class="p-2 text-white bg-gray-800 rounded">{{ request.bookrequest }}</p>
         </div>
 
         <div class="flex justify-end w-2/3 mt-4">
@@ -22,10 +22,9 @@
       </div>
 </template>
     
-    <script>
-    import router from "../../../router";
-    import axios from "axios";
-    import {useMessageStore} from '../../../stores/message.js'
+<script>
+import {useMessageStore} from '../../../stores/message.js'
+import ApiService from '../../../Apiservice';
     export default {
       data() {
         return {
@@ -41,7 +40,7 @@
         };
       },
       mounted() {
-        axios.get(`http://localhost:8000/api/bookrequests?page=1`)
+        ApiService.get(`bookrequests?page=1`)
             .then((response) => {
               this.storeMeta(response);
             })

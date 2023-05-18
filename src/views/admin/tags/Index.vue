@@ -1,5 +1,5 @@
 <template>
-      <div class="flex justify-center mt-20">
+      <div class="flex justify-center">
           <!-- message -->
           <div v-if="message" class="absolute z-50 p-2 px-4 mt-1 rounded right-4 top-12" style="background-color: #252c53;">
             <i class="fa-solid fa-star"></i> {{ messageStore.name }} {{ messageStore.message }}
@@ -7,7 +7,7 @@
     
           <!-- categories -->
         <vue-good-table
-          class="w-1/2 mt-4"
+          class="w-2/3 mt-4"
           :columns="columns"
           :rows="tags"
           styleClass="vgt-table"
@@ -47,10 +47,10 @@
     
     <script>
     import router from "../../../router";
-    import axios from "axios";
     import {useMessageStore} from '../../../stores/message.js'
     import "vue-good-table-next/dist/vue-good-table-next.css";
     import { VueGoodTable } from "vue-good-table-next";
+import ApiService from '../../../Apiservice';
     export default {
       components: {
         VueGoodTable,
@@ -84,14 +84,14 @@
           }, 3000);
         }
     
-        axios.get('http://localhost:8000/api/tags')
+        ApiService.get('tags')
         .then((response) => {
           this.tags = response.data.data;
         })
       },
       methods : {
           deleteFun (slug , name) {
-                axios.delete('http://localhost:8000/api/tags/' + slug)
+                ApiService.delete(`tags/${slug}`)
                 .then((response) => {
                   this.messageStore.updateMessage(name , "has been deleted successfully!");
                   router.push('/admin/tags');
