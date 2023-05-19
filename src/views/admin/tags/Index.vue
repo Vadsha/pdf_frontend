@@ -25,7 +25,7 @@
           <template #table-actions>
             <router-link
               :to="{name : 'CreateTag'}"
-              class="p-1 px-2 mr-1 text-sm no-underline bg-teal-600 rounded hover:text-gray-700"
+              class="p-1 px-2 mr-1 text-white bg-teal-600 rounded"
             >
               create
             </router-link>
@@ -33,7 +33,7 @@
     
           <template #table-row="props">
             <span v-if="props.column.field == 'slug'">
-              <router-link class="px-3 py-1 m-1 text-sm text-white bg-teal-600 rounded hover:text-gray-700" :to="{name : 'EditTag' , params : {slug : props.row.slug}}" ><i class="fa-solid fa-pen"></i></router-link>
+              <router-link class="px-3 py-1.5 m-1 text-white bg-teal-600 rounded hover:text-gray-700" :to="{name : 'EditTag' , params : {slug : props.row.slug}}" ><i class="fa-solid fa-pen"></i></router-link>
               <button @click="deleteFun(props.row.slug , props.row.name)" class="px-3 py-1 m-1 text-white bg-teal-600 rounded hover:text-gray-700"><i class="fa-solid fa-trash"></i></button>
     
             </span>

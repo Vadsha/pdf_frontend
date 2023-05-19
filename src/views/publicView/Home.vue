@@ -8,7 +8,7 @@
                   <h1 class="py-4 text-2xl">Latest Books</h1>
                   <div class="flex-wrap sm:flex">
                         <div  class=" flex flex-col items-center my-8 sm:w-[33%] hover:scale-110 transition" v-for="book in books" :key="book.id">
-                              <router-link to="/" class="flex justify-center w-full">
+                              <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}" class="flex justify-center w-full">
                                     <img :src="book.image" class="w-3/4" alt="">
                               </router-link>
                               <div class="flex justify-between w-3/4 p-2">
@@ -32,10 +32,10 @@
                   <!-- Trending Books -->
             <div class="flex-wrap mx-auto mt-12 sm:flex sm:w-5/6">
                   <h1 class="w-full p-4 text-2xl">Top Trending Books</h1>
-                  <router-link to="/" class="sm:w-[48%] m-2 sm:flex hover:scale-110 transition p-4" v-for="book in booksByDownload" :key="book.id">
+                  <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}" class="sm:w-[48%] m-2 sm:flex hover:scale-110 transition p-4" v-for="book in booksByDownload" :key="book.id">
                         <img :src="book.image" class="w-3/4 mx-auto sm:w-1/3 h-fit" alt="">
                         <div class="w-3/4 p-0 mx-auto mb-8 sm:w-2/3 sm:px-2">
-                              <h1 class="p-1 text-lg font-bold">{{ book.name }}</h1>
+                              <h1 class="p-1 pt-0 text-lg font-bold">{{ book.name }}</h1>
                               <p class="p-1">{{ book.description }}</p>
                               <button class="px-3 text-xl text-white bg-teal-500 rounded h-fit"><i class="fa-solid fa-download"></i></button>
                         </div>

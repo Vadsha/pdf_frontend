@@ -1,7 +1,7 @@
 <template>
 <div class="flex justify-center min-h-screen">
             <div class="container flex flex-col items-center justify-center flex-1 px-2 mx-auto ">
-                <div class="relative w-1/3 px-6 py-12 rounded shadow-md bg-sky-100" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;">
+                <div class="relative w-1/2 px-6 py-12 text-white bg-gray-800 rounded shadow-md" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;">
 
                   <router-link class="w-full ml-2 text-3xl text-center text-teal-600 no-underline hover:text-teal-600" to="/" >
                         Nerdy <span  class="text-red-400">Spot</span>
@@ -36,11 +36,11 @@
                         placeholder="Confirm Password" />
                   <!-- <span v-if="errors" class="absolute p-2 px-3 mt-12 text-red-500 left-4">Confirm your password</span> -->
 
-                  <div class="flex justify-between mt-2 text-gray-600">
+                  <div class="flex justify-between mt-2">
                         <span class="mt-4">Already have an account? <router-link class="text-teal-600" :to="{name : 'Login'}">Sign In</router-link></span>
                         <button
                         type="submit"
-                        class="w-1/4 py-2 my-1 text-center text-white bg-teal-600 rounded bg-green focus:outline-none"
+                        class="w-1/4 py-2 my-1 text-center text-white transition bg-teal-500 border border-teal-500 rounded bg-green hover:bg-transparent"
                     >sign up</button>
                   </div>
                   </form>
@@ -69,7 +69,11 @@ import axios from 'axios'
                   register(){
                         axios.post('http://localhost:8000/api/register' , this.registerData)
                               .then((response) => {
-                                    console.log(response);
+                                    TokenService.saveToken(response.data.data.token);
+                                    let token = TokenService.getToken();
+                                    if (token) {
+                                          this.$router.push('/admin');
+                                    }
                               })
                               .catch((response) => {
                                     this.errors = response.response.data.errors;

@@ -11,6 +11,7 @@
     <script>
     import Chart from "chart.js/auto";
     import axios from "axios";
+import ApiService from '../../Apiservice';
     export default {
       data() {
         return {
@@ -19,8 +20,7 @@
         };
       },
       mounted() {
-        axios
-          .get("http://localhost:8000/api/downloads")
+        ApiService.get("downloads")
           .then((response) => {
             let data = response.data.data;
             data.forEach((download) => {

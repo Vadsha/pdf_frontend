@@ -7,6 +7,7 @@ import HomeView from '../views/publicView/Home.vue'
 import ClientCategories from '../views/publicView/Categories.vue'
 import BooksByCategories from '../views/publicView/BooksByCategories.vue'
 import AllBooks from '../views/publicView/AllBooks.vue'
+import ShowBook from '../views/publicView/ShowBook.vue'
 
 import Register from "../views/authentication/Register.vue"
 import Login from "../views/authentication/Login.vue"
@@ -61,6 +62,11 @@ const router = createRouter({
           name: 'AllBooks',
           component: AllBooks,
         },
+        {
+          path: '/books/:slug',
+          name: 'ShowBook',
+          component: ShowBook,
+        },
       ]
     },
 
@@ -80,9 +86,9 @@ const router = createRouter({
       path : '/admin',
       name : "Dashboard",
       component : Dashboard,
-      // meta : {
-      //   middleware : 'auth'
-      // },
+      meta : {
+        middleware : 'auth'
+      },
       children : [
         {
           path : '',

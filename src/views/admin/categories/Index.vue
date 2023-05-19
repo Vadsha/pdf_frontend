@@ -30,7 +30,7 @@
       <template #table-actions>
         <router-link
           :to="{ name: 'CreateCategory' }"
-          class="p-1 px-2 mr-1 text-sm no-underline bg-teal-600 rounded hover:text-gray-700"
+          class="p-2 mr-1 text-white bg-teal-600 rounded"
         >
           create
         </router-link>
@@ -39,7 +39,7 @@
       <template #table-row="props">
         <span v-if="props.column.field == 'slug'">
           <router-link
-            class="px-3 py-1 m-1 text-sm text-white bg-teal-600 rounded hover:text-gray-700"
+            class="px-3 py-1.5 m-1 text-white bg-teal-600 rounded hover:text-gray-700"
             :to="{ name: 'EditCategory', params: { slug: props.row.slug } }"
             ><i class="fa-solid fa-pen"></i
           ></router-link>

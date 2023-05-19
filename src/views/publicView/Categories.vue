@@ -7,7 +7,7 @@
                   <div class="flex-wrap my-6 sm:flex justify-evenly" v-for="category in categories" :key="category.id">
                   <h1 class="w-full text-xl">{{ category.name }}</h1>
                   <div class="sm:w-[30%] p-2" v-for="book in category.books" :key="book.id">
-                        <router-link :to="{name : 'HomeView'}">
+                        <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}">
                               <img class="w-full transition hover:scale-105" :src="baseUrl + book.image"  alt="">
                         </router-link>
                         <div class="flex justify-between p-2">

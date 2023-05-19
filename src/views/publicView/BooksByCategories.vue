@@ -5,7 +5,7 @@
 
             <div class="flex-wrap mx-auto sm:w-5/6 sm:flex">
                   <div class="sm:w-[30%] p-6" v-for="book in books" :key="book.id">
-                        <router-link to="/">
+                        <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}">
                               <img class="w-full hover:scale-105" :src="book.image" alt="">
                         </router-link>
                         <div class="flex justify-between p-1 py-2">

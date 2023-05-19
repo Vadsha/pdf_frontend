@@ -21,22 +21,18 @@
                               <span v-if="errors.password" class="absolute p-3 mt-12 text-red-500 left-1">{{ errors.password[0] }}</span>
                               <span v-if="errors.message" class="absolute p-3 mt-12 text-red-500 left-1">{{ errors.message }}</span>
 
-                              <div class="flex justify-between mt-2 text-gray-600">
+                              <div class="flex justify-between mt-2">
                                     <span class="mt-4">Doesn't have an account? <router-link class="text-teal-600" :to="{name : 'Register'}">Sign up</router-link></span>
-                                    <button type="submit" class="w-1/4 py-2 my-1 text-center text-white bg-teal-600 rounded bg-green focus:outline-none">sign up</button>
+                                    <button type="submit" class="w-1/4 py-2 my-1 text-center text-white transition bg-teal-500 border border-teal-500 rounded bg-green hover:bg-transparent">sign up</button>
                               </div>
                         </form>
             </div>
       </div>
-
-
-      
-
-      </template>
+</template>
       
       <script>
       import axios from 'axios'
-import TokenService from '../../TokenService'
+      import TokenService from '../../TokenService'
 
             export default {
                   data () {
@@ -50,23 +46,23 @@ import TokenService from '../../TokenService'
                   },
 
                   methods : {
-                  login(){
-                        axios.post('http://localhost:8000/api/login' , this.loginData)
-                              .then((response) => {
-                                    TokenService.saveToken(response.data.data.token);
-                                    let token = TokenService.getToken();
-                                    if (token) {
-                                          this.$router.push('/admin');
-                                    }
-                              })
-                              .catch((response) => {
-                                    this.errors = response.response.data.errors;
-                                    console.log(response);
-                                    setTimeout(() => {
-                                          this.errors = {};
-                                    } , 3000)
-                              })
-                  }
+                        login(){
+                              axios.post('http://localhost:8000/api/login' , this.loginData)
+                                    .then((response) => {
+                                          TokenService.saveToken(response.data.data.token);
+                                          let token = TokenService.getToken();
+                                          if (token) {
+                                                this.$router.push('/admin');
+                                          }
+                                    })
+                                    .catch((response) => {
+                                          this.errors = response.response.data.errors;
+                                          console.log(response);
+                                          setTimeout(() => {
+                                                this.errors = {};
+                                          } , 3000)
+                                    })
+                        }
             }
             }
       </script>
