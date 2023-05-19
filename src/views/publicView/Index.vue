@@ -56,7 +56,7 @@
           <router-link :to="{name : 'AllBooks'}"  class="hover:scale-105 hover:text-teal-500">Books</router-link>
         </li>
         <li class="p-2">
-          <button @click="requestBookBox = !requestBookBox" class="bg-teal-600 py-1.5 border border-teal-600  px-3 text-white rounded  hover:bg-transparent">Request Book</button>
+          <button @click="requestBookBox = !requestBookBox" class="bg-teal-600 transition py-1.5 border border-teal-600  px-3 text-white rounded  hover:bg-transparent">Request Book</button>
         </li>
       </ul>
     </nav>
