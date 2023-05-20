@@ -11,19 +11,16 @@
           <p class="p-2 text-white bg-gray-800 rounded ">{{ comment.comment }}</p>
         </div>
 
-        <div class="flex justify-end w-2/3 mt-4">
-          <span :class="[meta.prev ? '' : 'bg-gray-400']"  @click="getData(meta.prev)" class="px-3 pt-2 pb-1 mx-2 text-white bg-teal-600 rounded"><i class="fa-solid fa-arrow-left"></i></span>
-          <span  class="px-3 pt-2 pb-1 mx-2 text-white bg-teal-600 rounded">{{ meta.current_page }}</span>
-          <span :class="[meta.next ? '' : 'bg-gray-400']" @click="getData(meta.next)" class="px-3 pt-2 pb-1 mx-2 text-white bg-teal-600 rounded"><i class="fa-solid fa-arrow-right"></i></span>
+        <div v-show="page < lastPage" class="flex justify-center w-full p-6">
+          <button class="animate-bounce" @click="addRequests">see more</button>
         </div>
-
         </div>
       </div>
     </template>
     
     <script>
 import ApiService from '../../../Apiservice.js';
-    import {useMessageStore} from '../../../stores/message.js'
+import {useMessageStore} from '../../../stores/message.js'
     export default {
 
       data() {
@@ -32,38 +29,28 @@ import ApiService from '../../../Apiservice.js';
           messageStore : useMessageStore(),
           message : false,
           comments : [],
-          meta : {
-            next : null,
-            prev : null,
-            current_page : null
-          }
+          page : 1,
+          lastPage : null
         };
       },
       mounted() {
-        ApiService.get('comments')
-        .then((response) => {
-          this.storeMeta(response);
-        })
+        this.getComments();
       },
       methods : {
-
-        storeMeta(response) {
-          this.comments = response.data.data;                     //store data
-          //for pagination
-          this.meta.prev = response.data.meta.links[0].url;
-          let index = response.data.meta.links.length - 1;
-          this.meta.next = response.data.meta.links[index].url;
-          this.meta.current_page = response.data.meta.current_page;
-        },
-       getData (link) {
-          if (link) {
-            axios.get(link)
+        getComments () {
+          ApiService.get(`comments?page=${this.page}`)
             .then((response) => {
-              this.storeMeta(response)
+              console.log(response);
+              this.comments.push(...response.data.data)
+              this.lastPage = response.data.meta.last_page
             })
-          }
         },
-        
+
+        addRequests () {
+          this.page++;
+          this.getComments();
+        },
+
         deleteComment (id , index) {
           if (index > -1) {
             this.comments.splice(index , 1);

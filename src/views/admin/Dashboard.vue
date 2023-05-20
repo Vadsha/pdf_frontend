@@ -15,21 +15,21 @@
 
     <div class="flex justify-between w-screen">
       
-          <div  class="flex flex-col items-center w-1/6 h-screen text-white bg-gray-800">
-                <div class="flex py-4">
-                  <img class="w-8 my-auto mr-2 rounded-full h-fit" src="../../assets/images/profile.webp" alt="">
-                  <h1 class="my-auto text-teal-500">Vaddshah Raduv</h1>
-                </div>
-                <router-link class="w-full py-2 text-center bg-teal-500 hover:bg-teal-400" :to="{name : 'dashboard-view'}">
-                  DASHBOARD
-                </router-link>
-                 <ul class="w-full px-8 py-2">
-                    <li v-for="item in navItems" :key="item.name" class="py-2">
-                        <router-link :to="{name : item.path}" class="hover:text-teal-500">
-                          <i :class="item.icon"></i><span class="ml-2">{{ item.name }}</span>
-                        </router-link>
-                    </li>
-                  </ul>
+        <div  class="sticky top-0 flex flex-col items-center w-1/6 h-screen text-white bg-gray-800">
+            <div class="flex w-full p-8 py-4">
+              <img class="w-8 mr-2 rounded-full h-fit" src="../../assets/images/profile.webp" alt="">
+              <h1 class="my-auto text-xl text-teal-500">{{ userStore.name }}</h1>
+            </div>
+            <router-link class="w-full py-2 text-center bg-teal-500 hover:bg-teal-400" :to="{name : 'dashboard-view'}">
+              DASHBOARD
+            </router-link>
+            <ul class="w-full px-8 py-2">
+              <li v-for="item in navItems" :key="item.name" class="py-2">
+                  <router-link :to="{name : item.path}" class="hover:text-teal-500">
+                    <i :class="item.icon"></i><span class="ml-2">{{ item.name }}</span>
+                  </router-link>
+              </li>
+            </ul>
         </div>
 
       <div class="z-30 w-5/6">
@@ -42,9 +42,11 @@
 </template>
 
 <script>
+import { useUserStore } from '../../stores/user';
 export default {
   data () {
     return {
+      userStore : useUserStore(),
       navItems : [
       {
           name : 'Manage Users',

@@ -33,8 +33,8 @@ import Quotes from '../../components/Quotes.vue'
 
             data () {
                   return {
-                        quoteMessage : `"Think before you speak.Read before you think."`,
-                        quoteSpeaker : "Fran Lebowitz",
+                        quoteMessage : `"A book is a magical garden you can carry in your pocket"`,
+                        quoteSpeaker : "Neil Gaiman",
                         books : [],
                         page : 1,
                         lastPage : null,

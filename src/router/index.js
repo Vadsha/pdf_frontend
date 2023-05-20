@@ -6,6 +6,7 @@ import IndexView from '../views/publicView/Index.vue'
 import HomeView from '../views/publicView/Home.vue'
 import ClientCategories from '../views/publicView/Categories.vue'
 import BooksByCategories from '../views/publicView/BooksByCategories.vue'
+import BooksByTags from '../views/publicView/BooksByTags.vue'
 import AllBooks from '../views/publicView/AllBooks.vue'
 import ShowBook from '../views/publicView/ShowBook.vue'
 
@@ -33,6 +34,8 @@ import BookRequests from "../views/admin/bookRequests/Index.vue"
 import Downloads from "../views/admin/downloads/Downloads.vue"
 
 import NotFound from "../views/publicView/NotFound.vue"
+import ApiService from '../Apiservice'
+import { useUserStore } from '../stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +59,11 @@ const router = createRouter({
           path: '/categories/:id',
           name: 'BooksByCategories',
           component: BooksByCategories,
+        },
+        {
+          path: '/tags/:name',
+          name: 'BooksByTags',
+          component: BooksByTags,
         },
         {
           path: '/books',
@@ -177,6 +185,13 @@ const router = createRouter({
 router.beforeEach((to , from , next) => {
   if (to.meta.middleware == 'auth') {
     let token = TokenService.getToken();
+    let userStore = useUserStore();
+    ApiService.get('user').then((response) => {
+      userStore.setUser(response.data);
+    }).catch((response) => {
+      alert('Something went wrong')
+    });
+
     if (token) {
       next();
     } else {

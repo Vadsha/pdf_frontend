@@ -56,7 +56,6 @@
 </template>
     
     <script>
-import router from "../../../router";
 import { useMessageStore } from "../../../stores/message.js";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
