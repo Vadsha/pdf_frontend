@@ -2,10 +2,10 @@ import axios from "axios";
 import TokenService from "./TokenService";
 class ApiService {
     static setConfig () {
-            this.token = TokenService.getToken(),
+            let token = TokenService.getToken();
             this.baseUrl = `http://localhost:8000/api/admin/`;
             this.config = {
-                  headers : {'Authorization' : `Bearer ${this.token}`}
+                  headers : {'Authorization' : `Bearer ${token}`}
         };
       }
     static get (url) {

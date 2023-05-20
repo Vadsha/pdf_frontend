@@ -9,7 +9,7 @@
                               <h2 class="text-lg">{{ book.author }}</h2>
                               <h3 class="mb-2">Category : {{ book.category }}</h3>
                               <div class="flex flex-wrap w-full">
-                                    <router-link to="/" class="px-2 py-1 m-1 text-sm text-white bg-green-500 rounded-sm" v-for="tag in book.tags" :key="tag.id">
+                                    <router-link class="px-2 py-1 m-1 text-sm text-white bg-green-500 rounded-sm" v-for="tag in book.tags"  :key="tag" :to="{name : 'BooksByTags' , params : {name : tag}}">
                                     {{ tag }}
                               </router-link>
                               </div>
@@ -20,6 +20,7 @@
                   </div>
                         <!-- comment section -->
                   <div class="w-full p-2 py-6">
+                        <h1 class="p-2 my-4 font-semibold">{{ commentLength }} comments</h1>
                         <form class="flex" @submit.prevent="addComment">
                               <input v-model="comment.comment" placeholder="Add a comment" class="w-[80%] px-3 h-fit py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" type="text">
                               <button class="px-4 py-1.5 m-2 mt-0 text-white bg-teal-500 rounded-sm"><i class="fa-solid fa-paper-plane"></i></button>
@@ -49,7 +50,7 @@
                   <div class="w-full py-6">
                         <h1 class="px-3 text-lg">TAGS</h1>
                         <div class="flex flex-wrap px-4">
-                              <router-link class=" w-[40%] py-2 mx-2 text-teal-600 hover:text-teal-400" to="/" v-for="tag in tags" :key="tag.id">
+                              <router-link class=" w-[40%] py-2 mx-2 text-teal-600 hover:text-teal-400" :to="{name : 'BooksByTags' , params : {name : tag.name}}" v-for="tag in tags" :key="tag.id">
                                     {{ tag.name }}
                               </router-link>
                         </div>
@@ -67,6 +68,7 @@ import axios from 'axios'
                   return {
                         slug : this.$route.params.slug,
                         book : {},
+                        commentLength : null,
                         tags : [],
                         categories : [],
                         comment : {
@@ -88,6 +90,7 @@ import axios from 'axios'
                         axios.get(`http://localhost:8000/api/client/get-book/${this.slug}`)
                               .then((response) => {
                                     this.book = response.data.data;
+                                    this.commentLength = this.book.comments.length;
                               })
                               .catch((response) => {
                                     console.log(response);
