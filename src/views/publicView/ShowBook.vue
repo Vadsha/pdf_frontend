@@ -14,8 +14,10 @@
                               </router-link>
                               </div>
                               <p class="mt-2"><i class="fa-solid fa-calendar-days"></i><span class="ml-1">{{ book.created_at }}</span></p>
-                              <p>Description - {{ book.description }}</p>
-                              <button class="px-3 py-1 my-2 text-white transition bg-teal-500 border border-teal-500 rounded hover:text-gray-700 hover:bg-transparent">Download</button>
+                              <p class="mb-3">Description - {{ book.description }}</p>
+                              <a class="px-3 py-2 text-white transition bg-teal-500 border border-teal-500 rounded hover:text-gray-700 hover:bg-transparent"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
+                                    download
+                              </a>                              
                         </div>
                   </div>
                         <!-- comment section -->
@@ -90,10 +92,14 @@ import axios from 'axios'
                         axios.get(`http://localhost:8000/api/client/get-book/${this.slug}`)
                               .then((response) => {
                                     this.book = response.data.data;
+                                    if (!this.book) {
+                                          window.history.back();
+                                    }
                                     this.commentLength = this.book.comments.length;
                               })
                               .catch((response) => {
                                     console.log(response);
+                                    window.history.back();
                               })
                   },
                   getCategories () {

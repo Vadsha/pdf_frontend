@@ -12,7 +12,9 @@
                   <div>
                         <h1 class="text-lg">{{ book.name }}</h1>
                   </div>
-                  <button class="px-3 text-xl text-white bg-teal-500 rounded h-fit"><i class="fa-solid fa-download"></i></button>
+                  <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
+                        <i class="fa-solid fa-download"></i>
+                  </a>
             </div>
       </div>
 </div>
@@ -46,6 +48,9 @@ import Quotes from '../../components/Quotes.vue'
                         axios.get(`http://localhost:8000/api/client/get-books-by-tags/${this.tagName}`)
                               .then((response) => {
                                     this.books = response.data.data;
+                                    if (this.books.length == 0) {
+                                          window.history.back();
+                                    }
                               })
                               .catch((response) => {
                                     console.log(response);
