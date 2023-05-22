@@ -13,7 +13,9 @@
                               </router-link>
                               <div class="flex justify-between w-3/4 p-2">
                                     <h1 class="font-bold">{{ book.name }}</h1>
-                                    <button class="px-3 text-xl text-white bg-teal-500 rounded h-fit"><i class="fa-solid fa-download"></i></button>
+                                    <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`" download>
+                                          <i class="fa-solid fa-download"></i>
+                                    </a>
                               </div>
                         </div>
                   </div>
@@ -37,7 +39,9 @@
                         <div class="w-3/4 p-0 mx-auto mb-8 sm:w-2/3 sm:px-2">
                               <h1 class="p-1 pt-0 text-lg font-bold">{{ book.name }}</h1>
                               <p class="p-1">{{ book.description }}</p>
-                              <button class="px-3 text-xl text-white bg-teal-500 rounded h-fit"><i class="fa-solid fa-download"></i></button>
+                              <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
+                                    <i class="fa-solid fa-download"></i>
+                              </a>
                         </div>
                   </router-link>
             </div>    

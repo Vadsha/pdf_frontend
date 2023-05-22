@@ -32,7 +32,7 @@ export default {
       error : false,
       request : {
         bookrequest : "",
-        user_id : 1
+        user_id : 3
       }
     }
   },
@@ -44,7 +44,7 @@ export default {
 
     requestBook(){
       if (this.request.bookrequest) {
-        axios.post('http://localhost:8000/api/bookrequests' , this.request)
+        axios.post('http://localhost:8000/api/client/request-book' , this.request)
           .then((response) => {
             console.log(response);
           })

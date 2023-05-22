@@ -65,7 +65,7 @@
 
       <!-- Footer -->
     <div class="py-4 text-gray-200 bg-gray-800">
-        <p class="w-full text-center">@Your mama so fat that she fell from both of the bed</p>
+        <p class="w-full text-center">@Your mama so fat that she fell from both side of the bed</p>
     </div>
 
   </div>
