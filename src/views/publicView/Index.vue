@@ -64,8 +64,30 @@
     <router-view class="z-40"></router-view>
 
       <!-- Footer -->
-    <div class="py-4 text-gray-200 bg-gray-800">
-        <p class="w-full text-center">@Your mama so fat that she fell from both side of the bed</p>
+    <div class="flex flex-wrap p-4 py-4 text-lg text-gray-200 bg-gray-800">
+
+      <h1 class="w-full py-3 text-xl text-center"> <i class="fa-solid fa-code"></i> Developed By <i class="fa-solid fa-code"></i>   </h1>
+
+      <div class="flex flex-col items-center w-1/2 p-3 text-xl">
+        <h1 class="text-teal-400">Vaddshah Raduv</h1>
+        <div class="py-2">
+          <a class="p-2" href="https://github.com/Vadsha" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a class="p-2" href="https://www.facebook.com/zwe.zarni.94651" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+          <a class="p-2" href="" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <a class="p-2" href="tel://+959890973740" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center w-1/2 p-3 text-xl">
+        <h1 class="text-teal-400">Axel Philips</h1>
+        <div class="py-2">
+          <a class="p-2" href="https://github.com/NgaeNgae" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a class="p-2" href="" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+          <a class="p-2" href="https://instagram.com/axel81020052023?igshid=MzNlNGNkZWQ4Mg==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <a class="p-2" href="tel://+959451963716" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+      
     </div>
 
   </div>

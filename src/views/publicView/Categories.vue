@@ -12,7 +12,7 @@
                         </router-link>
                         <div class="flex justify-between p-2">
                               <h1 class="font-bold">{{ book.name }}</h1>
-                              <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
+                              <a class="px-2 py-1 text-xl text-white bg-teal-500 rounded-full h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
                                     <i class="fa-solid fa-download"></i>
                               </a>
                         </div>
