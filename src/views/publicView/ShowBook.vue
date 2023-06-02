@@ -65,16 +65,18 @@
 
 <script>
 import axios from 'axios'
+import { useUserStore } from '../../stores/user';
       export default {
             data () {
                   return {
+                        userStore : useUserStore(),
                         slug : this.$route.params.slug,
                         book : {},
                         commentLength : null,
                         tags : [],
                         categories : [],
                         comment : {
-                              user_id : 1,
+                              user_id : null,
                               book_id : null,
                               comment : ''
                         }
@@ -121,8 +123,10 @@ import axios from 'axios'
                               })
                   },
                   addComment () {
-                        this.comment.book_id = this.book.id,
-                        axios.post('http://localhost:8000/api/client/comment' , this.comment)
+                        if (this.userStore.id) {
+                              this.comment.book_id = this.book.id,
+                              this.comment.user_id = this.userStore.id;
+                              axios.post('http://localhost:8000/api/client/comment' , this.comment)
                               .then((response) => {
                                     this.book.comments.unshift(response.data.data)
                                     this.comment.comment = '';
@@ -130,6 +134,9 @@ import axios from 'axios'
                               .catch((response) => {
                                     console.log(response);
                               })
+                        } else {
+                              window.location.assign('/login')
+                        }
                   }
             }
       }

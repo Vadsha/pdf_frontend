@@ -10,6 +10,9 @@ import BooksByTags from '../views/publicView/BooksByTags.vue'
 import AllBooks from '../views/publicView/AllBooks.vue'
 import ShowBook from '../views/publicView/ShowBook.vue'
 
+import CustomerRegister from '../views/authentication/CustomerRegister.vue'
+import CustomerLogin from '../views/authentication/CustomerLogin.vue'
+
 import Register from "../views/authentication/Register.vue"
 import Login from "../views/authentication/Login.vue"
 
@@ -36,6 +39,7 @@ import Downloads from "../views/admin/downloads/Downloads.vue"
 import NotFound from "../views/publicView/NotFound.vue"
 import ApiService from '../Apiservice'
 import { useUserStore } from '../stores/user'
+import axios from 'axios'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,15 +81,24 @@ const router = createRouter({
         },
       ]
     },
-
+    {
+      path : '/login',
+      name : 'CustomerLogin',
+      component : CustomerLogin
+    },
+    {
+      path : '/register',
+      name : 'CustomerRegister',
+      component : CustomerRegister
+    },
 
     {
-      path: '/login',
+      path: '/admin/login',
       name: 'Login',
       component: Login,
     },
     {
-      path: '/register',
+      path: '/admin/register',
       name: 'Register',
       component: Register,
     },
@@ -189,7 +202,7 @@ router.beforeEach((to , from , next) => {
     ApiService.get('user').then((response) => {
       userStore.setUser(response.data);
     }).catch((response) => {
-      alert('Something went wrong')
+      window.location.assign('/login');
     });
 
     if (token) {
@@ -199,6 +212,16 @@ router.beforeEach((to , from , next) => {
       window.location.assign('/login');
     }
   }  else {
+    let token = TokenService.getToken();
+    if (token) {
+      let userStore = useUserStore();
+      let config = { headers : {'Authorization' : `Bearer ${token}`} };
+      axios.get('http://localhost:8000/api/user' , config).then((response) => {
+        userStore.setUser(response.data);
+      }).catch((response) => {
+        console.log(response);
+      })
+    }
     next();
   }
 })

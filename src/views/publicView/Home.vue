@@ -13,7 +13,7 @@
                               </router-link>
                               <div class="flex justify-between w-3/4 p-2">
                                     <h1 class="font-bold">{{ book.name }}</h1>
-                                    <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`" download>
+                                    <a class="px-2 py-1 text-white bg-teal-500 rounded-full ext-xl h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`" download>
                                           <i class="fa-solid fa-download"></i>
                                     </a>
                               </div>
@@ -32,14 +32,14 @@
             </div>
 
                   <!-- Trending Books -->
-            <div class="flex-wrap mx-auto mt-12 sm:flex sm:w-5/6">
+            <div class="flex-wrap mx-auto mt-12 md:flex sm:w-5/6">
                   <h1 class="w-full p-4 text-2xl">Top Trending Books</h1>
-                  <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}" class="sm:w-[48%] m-2 sm:flex hover:scale-110 transition p-4" v-for="book in booksByDownload" :key="book.id">
+                  <router-link :to="{name : 'ShowBook' , params : {slug : book.slug}}" class="md:w-[48%] m-2 sm:flex hover:scale-110 transition p-4" v-for="book in booksByDownload" :key="book.id">
                         <img :src="book.image" class="w-3/4 mx-auto sm:w-1/3 h-fit" alt="">
                         <div class="w-3/4 p-0 mx-auto mb-8 sm:w-2/3 sm:px-2">
                               <h1 class="p-1 pt-0 text-lg font-bold">{{ book.name }}</h1>
                               <p class="p-1">{{ book.description }}</p>
-                              <a class="px-3 py-1 text-xl text-white bg-teal-500 rounded h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
+                              <a class="px-2 py-1 text-xl text-white bg-teal-500 rounded-full h-fit"  :href="`http://localhost:8000/api/client/download/${book.file}`"  download>
                                     <i class="fa-solid fa-download"></i>
                               </a>
                         </div>
